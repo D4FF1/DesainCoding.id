@@ -68,6 +68,7 @@
             font-family: inherit;
         }
 
+        /* ===== LAYOUT & CONTAINERS ===== */
         .container {
             width: 100%;
             max-width: 1200px;
@@ -171,7 +172,7 @@
             font-weight: 600;
         }
 
-        /* ===== HEADER ===== */
+        /* ===== HEADER & NAVIGATION ===== */
         header {
             background-color: var(--white);
             backdrop-filter: blur(10px);
@@ -331,7 +332,8 @@
             flex-wrap: wrap;
         }
 
-        /* ===== STATS SECTION ===== */
+        /* ===== COMPONENTS ===== */
+        /* Stats Component */
         .stats-section {
             background: var(--gradient-blue-dark);
             color: var(--white);
@@ -389,7 +391,7 @@
             font-weight: 500;
         }
 
-        /* ===== SERVICES SECTION ===== */
+        /* Service Cards */
         .services-grid {
             display: grid;
             grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
@@ -484,7 +486,7 @@
             font-size: 1rem;
         }
 
-        /* ===== PROCESS SECTION ===== */
+        /* Process Steps */
         .process-grid {
             display: grid;
             grid-template-columns: repeat(auto-fit, minmax(240px, 1fr));
@@ -543,7 +545,7 @@
             line-height: 1.6;
         }
 
-        /* ===== PRICING SECTION ===== */
+        /* Pricing Cards */
         .pricing-grid {
             display: grid;
             grid-template-columns: repeat(auto-fit, minmax(280px, 1fr));
@@ -758,7 +760,7 @@
             box-shadow: var(--shadow-hover);
         }
 
-        /* ===== TESTIMONIALS SECTION ===== */
+        /* Testimonial Cards */
         .testimonials-section {
             background: var(--light-gray);
             padding: 70px 0;
@@ -816,7 +818,7 @@
             font-size: 0.85rem;
         }
 
-        /* ===== TEAM SECTION ===== */
+        /* Team Cards */
         .team-grid {
             display: grid;
             grid-template-columns: repeat(auto-fit, minmax(280px, 1fr));
@@ -933,7 +935,7 @@
             transform: translateY(-3px);
         }
 
-        /* ===== FAQ SECTION ===== */
+        /* FAQ Component */
         .faq-section {
             background: var(--light-gray);
             padding: 70px 0;
@@ -1097,7 +1099,8 @@
             z-index: 2;
         }
 
-        /* ===== WHATSAPP WIDGET ===== */
+        /* ===== FIXED ELEMENTS ===== */
+        /* WhatsApp Widget */
         .whatsapp-widget {
             position: fixed;
             bottom: 25px;
@@ -1125,7 +1128,7 @@
             box-shadow: 0 6px 20px rgba(37, 211, 102, 0.4);
         }
 
-        /* ===== BACK TO TOP BUTTON ===== */
+        /* Back to Top Button */
         .back-to-top {
             position: fixed;
             bottom: 90px;
@@ -1207,6 +1210,39 @@
 
         .pulse-animation {
             animation: pulse 2s infinite;
+        }
+
+        /* ===== UTILITY CLASSES ===== */
+        .text-center {
+            text-align: center;
+        }
+
+        .mt-15 {
+            margin-top: 15px;
+        }
+
+        .mb-15 {
+            margin-bottom: 15px;
+        }
+
+        .mt-30 {
+            margin-top: 30px;
+        }
+
+        .mb-30 {
+            margin-bottom: 30px;
+        }
+
+        .hidden {
+            display: none;
+        }
+
+        .opacity-0 {
+            opacity: 0;
+        }
+
+        .opacity-1 {
+            opacity: 1;
         }
 
         /* ===== RESPONSIVE STYLES ===== */
@@ -1337,39 +1373,6 @@
                 grid-template-columns: 1fr;
                 gap: 20px;
             }
-        }
-
-        /* ===== UTILITY CLASSES ===== */
-        .text-center {
-            text-align: center;
-        }
-
-        .mt-15 {
-            margin-top: 15px;
-        }
-
-        .mb-15 {
-            margin-bottom: 15px;
-        }
-
-        .mt-30 {
-            margin-top: 30px;
-        }
-
-        .mb-30 {
-            margin-bottom: 30px;
-        }
-
-        .hidden {
-            display: none;
-        }
-
-        .opacity-0 {
-            opacity: 0;
-        }
-
-        .opacity-1 {
-            opacity: 1;
         }
     </style>
 </head>
@@ -1554,7 +1557,6 @@
                             <li>Desain responsif basic</li>
                             <li>Optimasi SEO dasar</li>
                             <li>Form kontak sederhana</li>
-
                             <li>Revisi 1x</li>
                             <li>Dukungan 1 bulan</li>
                             <li><strong>Cocok untuk: Portofolio, CV Online, Usaha Mikro</strong></li>
@@ -1923,45 +1925,31 @@
             window.scrollTo({ top: 0, behavior: 'smooth' });
         });
         
-// ===== FAQ Accordion =====
-faqQuestions.forEach(question => {
-    question.addEventListener('click', () => {
-        const answer = question.nextElementSibling;
-        const icon = question.querySelector('i');
+        // ===== FAQ Accordion =====
+        faqQuestions.forEach(question => {
+            question.addEventListener('click', () => {
+                const answer = question.nextElementSibling;
+                const icon = question.querySelector('i');
 
-        // Toggle active class on question
-        question.classList.toggle('active');
+                // Toggle active class on question
+                question.classList.toggle('active');
 
-        // Toggle answer height for smooth animation
-        if (question.classList.contains('active')) {
-            answer.style.maxHeight = answer.scrollHeight + "px";
-            icon.style.transform = 'rotate(180deg)';
-        } else {
-            answer.style.maxHeight = 0;
-            icon.style.transform = 'rotate(0deg)';
-        }
-
-        // Optional: close other FAQ items if only one should be open at a time
-        /*
-        faqQuestions.forEach(otherQuestion => {
-            if (otherQuestion !== question && otherQuestion.classList.contains('active')) {
-                const otherAnswer = otherQuestion.nextElementSibling;
-                const otherIcon = otherQuestion.querySelector('i');
-                otherQuestion.classList.remove('active');
-                otherAnswer.style.maxHeight = 0;
-                otherIcon.style.transform = 'rotate(0deg)';
-            }
+                // Toggle answer height for smooth animation
+                if (question.classList.contains('active')) {
+                    answer.style.maxHeight = answer.scrollHeight + "px";
+                    icon.style.transform = 'rotate(180deg)';
+                } else {
+                    answer.style.maxHeight = 0;
+                    icon.style.transform = 'rotate(0deg)';
+                }
+            });
         });
-        */
-    });
-});
 
-// ===== Initialize FAQ on page load =====
-faqQuestions.forEach(question => {
-    const answer = question.nextElementSibling;
-    answer.style.maxHeight = 0; // Tutup semua FAQ default
-});
-
+        // ===== Initialize FAQ on page load =====
+        faqQuestions.forEach(question => {
+            const answer = question.nextElementSibling;
+            answer.style.maxHeight = 0; // Tutup semua FAQ default
+        });
         
         // ===== Update Active Nav Link on Scroll =====
         function updateActiveNavLink() {
