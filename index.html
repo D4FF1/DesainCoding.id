@@ -1923,33 +1923,45 @@
             window.scrollTo({ top: 0, behavior: 'smooth' });
         });
         
-        // ===== FAQ Accordion =====
-        faqQuestions.forEach(question => {
-            question.addEventListener('click', () => {
-                const answer = question.nextElementSibling;
-                const icon = question.querySelector('i');
-                
-                // Toggle active class
-                answer.classList.toggle('active');
-                
-                // Rotate icon
-                if (answer.classList.contains('active')) {
-                    icon.style.transform = 'rotate(180deg)';
-                } else {
-                    icon.style.transform = 'rotate(0deg)';
-                }
-                
-                // Close other answers
-                faqQuestions.forEach(otherQuestion => {
-                    if (otherQuestion !== question) {
-                        const otherAnswer = otherQuestion.nextElementSibling;
-                        const otherIcon = otherQuestion.querySelector('i');
-                        otherAnswer.classList.remove('active');
-                        otherIcon.style.transform = 'rotate(0deg)';
-                    }
-                });
-            });
+// ===== FAQ Accordion =====
+faqQuestions.forEach(question => {
+    question.addEventListener('click', () => {
+        const answer = question.nextElementSibling;
+        const icon = question.querySelector('i');
+
+        // Toggle active class on question
+        question.classList.toggle('active');
+
+        // Toggle answer height for smooth animation
+        if (question.classList.contains('active')) {
+            answer.style.maxHeight = answer.scrollHeight + "px";
+            icon.style.transform = 'rotate(180deg)';
+        } else {
+            answer.style.maxHeight = 0;
+            icon.style.transform = 'rotate(0deg)';
+        }
+
+        // Optional: close other FAQ items if only one should be open at a time
+        /*
+        faqQuestions.forEach(otherQuestion => {
+            if (otherQuestion !== question && otherQuestion.classList.contains('active')) {
+                const otherAnswer = otherQuestion.nextElementSibling;
+                const otherIcon = otherQuestion.querySelector('i');
+                otherQuestion.classList.remove('active');
+                otherAnswer.style.maxHeight = 0;
+                otherIcon.style.transform = 'rotate(0deg)';
+            }
         });
+        */
+    });
+});
+
+// ===== Initialize FAQ on page load =====
+faqQuestions.forEach(question => {
+    const answer = question.nextElementSibling;
+    answer.style.maxHeight = 0; // Tutup semua FAQ default
+});
+
         
         // ===== Update Active Nav Link on Scroll =====
         function updateActiveNavLink() {
